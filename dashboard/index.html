@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Token Launch Radar — pre-token protocols priced by their launched peers</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<header class="masthead">
+  <div class="masthead-inner">
+    <div class="brand">
+      <div class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></div>
+      <div>
+        <h1>Token Launch Radar</h1>
+        <p class="tagline">Every protocol that records no token yet, priced by what its launched peers are worth — and how to farm each one.</p>
+      </div>
+    </div>
+    <dl class="stats" id="stats"></dl>
+  </div>
+  <nav class="tabs" id="tabs">
+    <button type="button" data-view="board" class="tab is-active">The board</button>
+    <button type="button" data-view="live" class="tab">Already trading</button>
+    <button type="button" data-view="model" class="tab">How the model prices</button>
+  </nav>
+</header>
+
+<main>
+  <section id="view-board">
+    <form class="controls" id="controls">
+      <label class="ctl ctl-search">Search
+        <input type="search" id="q" placeholder="Protocol name or slug" autocomplete="off">
+      </label>
+      <label class="ctl">Category
+        <select id="f-category"><option value="">All categories</option></select>
+      </label>
+      <label class="ctl">Chain
+        <select id="f-chain"><option value="">All chains</option></select>
+      </label>
+      <label class="ctl">Min TVL
+        <select id="f-tvl">
+          <option value="0">Any TVL</option>
+          <option value="25000000">$25M+</option>
+          <option value="50000000">$50M+ (watchlist floor)</option>
+          <option value="100000000">$100M+</option>
+          <option value="500000000">$500M+</option>
+        </select>
+      </label>
+      <label class="ctl ctl-check">
+        <input type="checkbox" id="f-watch"> Watchlist only
+      </label>
+      <p class="ctl-count" id="count"></p>
+    </form>
+    <div class="table-wrap">
+      <table class="board" id="board-table">
+        <thead>
+          <tr>
+            <th data-sort="rank" class="num">Rank</th>
+            <th data-sort="name">Protocol</th>
+            <th data-sort="category">Category</th>
+            <th data-sort="tvl_usd" class="num">TVL</th>
+            <th data-sort="change_7d" class="num">7d</th>
+            <th data-sort="age_days" class="num">Tokenless</th>
+            <th data-sort="implied_value_usd" class="num">Implied value</th>
+            <th data-sort="radar_score" class="num">Radar</th>
+          </tr>
+        </thead>
+        <tbody id="board-body"></tbody>
+      </table>
+    </div>
+    <p class="hint">Select any row for the protocol's detail view: the model's working, its launched peers and the full farm plan.</p>
+  </section>
+
+  <section id="view-live" hidden>
+    <p class="lede">These protocols already trade, so the radar never ranks them: it prices the board's pre-token rows from the market's own values, and shows the largest of them here as the yardstick.</p>
+    <div class="table-wrap">
+      <table class="board" id="live-table">
+        <thead><tr><th>Protocol</th><th>Category</th><th class="num">TVL</th><th class="num">Market cap</th><th class="num">7d</th><th class="num">Cap / TVL</th></tr></thead>
+        <tbody id="live-body"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="view-model" hidden>
+    <div class="model-text" id="model-text"></div>
+  </section>
+
+  <section id="view-detail" hidden></section>
+</main>
+
+<footer>
+  <p id="foot"></p>
+</footer>
+
+<script src="../data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
